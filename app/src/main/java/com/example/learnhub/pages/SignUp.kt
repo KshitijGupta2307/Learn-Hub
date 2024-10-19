@@ -100,6 +100,7 @@ fun SignUp( modifier: Modifier = Modifier,
         Button(
             onClick = {
                 authViewModel.SignUp(email, password)
+                navController.navigate("loginPage")
                       },
             modifier = Modifier.fillMaxWidth()
         ) {
