@@ -29,70 +29,88 @@ import androidx.navigation.NavController
 import com.example.learnhub.AuthViewModel
 import com.example.learnhub.R
 
-
 @Composable
-fun SignUp(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel){
+fun SignUp(
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    authViewModel: AuthViewModel
+) {
+    // State for email and password input
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
+    // Observe authentication state
+    val authState by authViewModel.authState.observeAsState()
+
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
-            .padding(16.dp), // Add padding to the screen
+            .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Logo
         Image(
             painter = painterResource(id = R.drawable.b),
-            modifier = Modifier.size(200.dp),
-            contentDescription = "Learn Hub Logo" // More descriptive
+            contentDescription = "Learn Hub Logo",
+            modifier = Modifier.size(200.dp)
         )
+
+        // Title
         Text(
             text = "Welcome To Learn Hub",
-            style = MaterialTheme.typography.headlineMedium, // Apply typography style
+            style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = Modifier.height(8.dp)) // Improved spacing
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Subtitle
         Text(
-            text = "SignUp to LearnHub ",
-            style = MaterialTheme.typography.bodyLarge, // Apply typography style
+            text = "Sign Up to LearnHub",
+            style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Email Input Field
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
             label = { Text("Email Address") },
-            modifier = Modifier.fillMaxWidth() // Make text field fill width
+            modifier = Modifier.fillMaxWidth()
         )
+
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Password Input Field
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
             label = { Text("Password") },
             visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth() // Make text field fill width
+            modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = {
 
-        }) {
-            Text("Signup")
+        // Sign Up Button
+        Button(
+            onClick = { authViewModel.SignUp(email, password) },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Sign Up")
         }
+
         Spacer(modifier = Modifier.height(32.dp))
 
-
-
-        Spacer(modifier = Modifier.height(16.dp))
-        TextButton(onClick = {
-            navController.navigate("LoginPage")
-        }) {
-            Text("Already has a account")
+        // Navigate to Login Page
+        TextButton(
+            onClick = { navController.navigate("LoginPage") }
+        ) {
+            Text("Already have an account? Log In")
         }
     }
 }
