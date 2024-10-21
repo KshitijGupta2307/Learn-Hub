@@ -117,12 +117,12 @@ fun SignUp( modifier: Modifier = Modifier,
             Button(
                 onClick = {
                     authViewModel.SignUp(email, password)
-                },enabled = authState.value != AuthViewModel.AuthState.Loading,)
+                },enabled = authState.value != AuthViewModel.AuthState.Loading)
 
     {
                 Text("Sign Up")
             }
-
+        
             Spacer(modifier = Modifier.height(32.dp))
 
             // Navigate to Login Page
