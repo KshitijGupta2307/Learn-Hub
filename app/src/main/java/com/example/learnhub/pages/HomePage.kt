@@ -1,6 +1,7 @@
 package com.example.learnhub.pages
 
 import android.annotation.SuppressLint
+import android.app.Notification
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.learnhub.AuthViewModel
@@ -59,7 +61,7 @@ fun HomePage(modifier: Modifier= Modifier ,navController: NavController ,authVie
                }
          }
     ) { innerpadding ->
-        ContentScreen(modifier = Modifier.padding(innerpadding))
+        ContentScreen(modifier = Modifier.padding(innerpadding),selectIndex)
     }
 
     val authState = authViewModel.authState.observeAsState()
@@ -87,16 +89,17 @@ fun HomePage(modifier: Modifier= Modifier ,navController: NavController ,authVie
 
     }
 
-
-    @Composable
-    fun ContentScreen(modifier: Modifier = Modifier) {
-
-    }
 }
 
 
 
 @Composable
-fun ContentScreen(modifier: Modifier) {
+fun ContentScreen(modifier: Modifier , selectedIndex: Int) {
+when(selectedIndex){
 
+    1 -> Notification(modifier = modifier)
+    2 -> ToDo(modifier)
 }
+}
+
+
