@@ -74,7 +74,7 @@ fun HomePage(modifier: Modifier= Modifier ,navController: NavController ,authVie
 @Composable
 fun ContentScreen(modifier: Modifier , selectedIndex: Int) {
     when (selectedIndex) {
-        0-> Home(modifier = modifier, authViewModel = AuthViewModel())
+        0-> Home(modifier = modifier)
         1 -> Notification(modifier = modifier)
         2 -> ToDo(modifier)
     }
