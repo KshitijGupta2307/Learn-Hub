@@ -50,10 +50,9 @@ fun SignUp( modifier: Modifier = Modifier,
             is AuthViewModel.AuthState.Authenticated -> {
                 navController.navigate("HomePage")
             }
-
             is AuthViewModel.AuthState.Error -> {
                 val errorMessage = (authState.value as AuthViewModel.AuthState.Error).message
-                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
             }
 
             else -> Unit

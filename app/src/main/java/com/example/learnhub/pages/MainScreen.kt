@@ -1,9 +1,6 @@
 package com.example.learnhub.pages
 
 import android.annotation.SuppressLint
-import android.app.Notification
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -15,7 +12,6 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -23,10 +19,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.learnhub.AuthViewModel
 import com.example.learnhub.ui.theme.navItem
@@ -74,32 +67,16 @@ fun HomePage(modifier: Modifier= Modifier ,navController: NavController ,authVie
         }
 
     }
-    Column(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    )
-    {
-        Text(text = "Home Page", fontSize = 24.sp)
-        TextButton(
-            onClick = { authViewModel.logout() }
-        ) {
-            Text("signout")
-        }
-
-    }
-
-}
+ }
 
 
 
 @Composable
 fun ContentScreen(modifier: Modifier , selectedIndex: Int) {
-when(selectedIndex){
-
-    1 -> Notification(modifier = modifier)
-    2 -> ToDo(modifier)
+    when (selectedIndex) {
+        0-> Home(modifier = modifier, authViewModel = AuthViewModel())
+        1 -> Notification(modifier = modifier)
+        2 -> ToDo(modifier)
+    }
 }
-}
-
 
