@@ -30,7 +30,7 @@ fun LearnHubBadge() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 4.dp)
-            .padding(bottom = 0.dp) // Increased bottom padding for better spacing
+            .padding(bottom = 0.dp)
             .background(brush = gradient, shape = RoundedCornerShape(12.dp))
             .padding(horizontal = 16.dp, vertical = 8.dp),
         contentAlignment = Alignment.Center
@@ -47,14 +47,15 @@ fun LearnHubBadge() {
 @Composable
 fun Home(modifier: Modifier = Modifier, navController: NavHostController) {
     Column(
-        modifier = modifier.fillMaxSize().padding(8.dp), // Fill the max size and apply padding
-        horizontalAlignment = Alignment.CenterHorizontally // Center align items horizontally
+        modifier = modifier.fillMaxSize().padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LearnHubBadge()
 
         // Spacer for better vertical alignment
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Define the list of items with their corresponding navigation routes
         val itemsList: List<Pair<String, Int>> = listOf(
             "Coding" to R.drawable.coding,
             "OS" to R.drawable.os,
@@ -74,7 +75,8 @@ fun Home(modifier: Modifier = Modifier, navController: NavHostController) {
         ) {
             items(itemsList) { (label, imageResId) ->
                 GridItemWithImageAndText(label = label, imageResId = imageResId) {
-                    navController.navigate("SecondActivity")
+                    // Navigate to the appropriate route based on the label
+                    navController.navigate(label) // Using label as the route
                 }
             }
         }
@@ -88,14 +90,14 @@ fun GridItemWithImageAndText(label: String, imageResId: Int, onClick: () -> Unit
         modifier = Modifier
             .padding(8.dp)
             .clickable { onClick() }
-            .fillMaxWidth() // Ensure each grid item takes the available width
+            .fillMaxWidth()
     ) {
         Image(
             painter = painterResource(imageResId),
             contentDescription = label,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(170.dp) // Fixed size for images
+                .size(170.dp)
                 .padding(8.dp)
         )
 

@@ -5,10 +5,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun SecondActivity(){
+fun React(){
     Column {
 
-        Text(text = "Second Activity")
+        Text(text = "OS")
 
     }
 
