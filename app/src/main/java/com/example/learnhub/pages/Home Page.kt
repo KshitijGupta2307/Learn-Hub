@@ -1,116 +1,78 @@
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.learnhub.R
 
 @Composable
-fun LearnHubBadge() {
-    // Gradient background for the badge
-    val gradient = Brush.linearGradient(
-        colors = listOf(Color(0xFF1E88E5), Color(0xFF42A5F5)) // Blue gradient
+fun Home(modifier: Modifier = Modifier, navController: NavHostController) {
+    // Explicitly define the type for the itemsList
+    val itemsList: List<Pair<String, Int>> = listOf(
+        "Coding" to R.drawable.coding,
+        "OS" to R.drawable.os,
+        "DBMS" to R.drawable.dbms,
+        "React" to R.drawable.react,
+        "Android" to R.drawable.android,
+        "TOC" to R.drawable.toc,
+        "ML" to R.drawable.ml,
+        "To-Do" to R.drawable.todo
     )
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth() // Make the badge fill the entire width
-            .padding(16.dp)
-            .background(brush = gradient, shape = RoundedCornerShape(12.dp)) // Blue gradient with rounded corners
-            .padding(horizontal = 16.dp, vertical = 8.dp), // Padding inside the badge
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "LearnHub",
-            color = Color.White,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold
-        )
-    }
-}
-
-@Composable
-fun Home(modifier: Modifier = Modifier) {
-    val itemsList = listOf(
-        "Coding C",
-        "Operating System",
-        "DBMS",
-        "React JS",
-        "Android",
-        "TOC",
-        "ML",
-        "todo"
-    )
-
-    Column(
+    // Display the grid of clickable image buttons
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 128.dp),
         modifier = modifier
-            .fillMaxSize() // Fill available size
-            .padding(8.dp)
+            .fillMaxSize()
+            .padding(8.dp),
+        contentPadding = PaddingValues(16.dp)
     ) {
-        // Add the LearnHub Badge at the top
-        LearnHubBadge()
-
-        // LazyVerticalGrid to display items in a grid
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 128.dp), // Adaptive grid cells
-            modifier = Modifier
-                .fillMaxSize(), // Fill available size
-            contentPadding = PaddingValues(
-                top = 8.dp,
-                bottom = 64.dp // Bottom padding to accommodate bottom bar
-            )
-        ) {
-            items(itemsList) { item ->
-                GridItemWithImageAndText(item)
+        items(itemsList) { (label, imageResId) ->
+            GridItemWithImageAndText(label = label, imageResId = imageResId) {
+                // Navigate to SecondActivity when an item is clicked
+                navController.navigate("SecondActivity")
             }
         }
     }
 }
 
 @Composable
-fun GridItemWithImageAndText(item: String) {
+fun GridItemWithImageAndText(label: String, imageResId: Int, onClick: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(8.dp)
-            .fillMaxWidth()
+            .clickable { onClick() }
     ) {
-        // Image with fixed size
+        // Image Button
         Image(
-            painter = painterResource(id = R.drawable.b), // Replace with your image resource
-            contentDescription = null,
+            painter = painterResource(imageResId),
+            contentDescription = label,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(120.dp) // Set a fixed size for the image
-                .padding(bottom = 8.dp),
-            contentScale = ContentScale.Crop
+                .size(80.dp)
+                .padding(8.dp)
         )
 
-        // Text below the image
+        // Label under each image
         Text(
-            text = item,
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
+            text = label,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium,
+            color = Color.Black,
+            modifier = Modifier.padding(top = 4.dp)
         )
     }
 }
-
