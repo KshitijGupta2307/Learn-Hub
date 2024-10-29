@@ -60,7 +60,7 @@ fun Home(modifier: Modifier = Modifier, navController: NavHostController) {
 
         // List of items with their corresponding navigation routes and PDF URLs
         val itemsList: List<Triple<String, Int, String>> = listOf(
-            Triple("Coding", R.drawable.coding, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
+            Triple("Coding", R.drawable.coding, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/dbms%20notes.pdf?alt=media&token=d0469817-97b8-4407-a1b5-f0d700bc35db"),
             Triple("OS", R.drawable.os, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
             Triple("DBMS", R.drawable.dbms, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
             Triple("React", R.drawable.react, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
@@ -120,8 +120,7 @@ fun PdfViewerScreen(pdfUrl: String) {
 }
 @Composable
 fun FirebasePdfWebView(pdfUrl: String) {
-    val pdfDriveViewerUrl = "https://drive.google.com/viewerng/viewer?embedded=true&url=https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/dbms%20notes.pdf?alt=media&token=d0469817-97b8-4407-a1b5-f0d700bc35db"
-
+    val pdfDriveViewerUrl = "https://drive.google.com/viewerng/viewer?embedded=true&url=$pdfUrl"
     AndroidView(factory = { context ->
         WebView(context).apply {
             webViewClient = WebViewClient()
