@@ -26,6 +26,7 @@ import androidx.navigation.NavHostController
 import com.example.learnhub.AuthViewModel
 import com.example.learnhub.ui.theme.navItem
 
+
 @SuppressLint("SuspiciousIndentation")
 @Composable
 fun HomePage(
@@ -80,6 +81,6 @@ fun ContentScreen(
     when (selectedIndex) {
         0 -> Home(modifier = modifier, navController = navController)
         1 -> Notification(modifier = modifier)
-        2 -> ComputerNetworks(modifier=modifier)
+        2 -> ToDO()
     }
 }
