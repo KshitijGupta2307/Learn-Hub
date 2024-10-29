@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 @Composable
 fun Coding(){
     Column {
-
+    LearnHubBadge()
         Text(text = "Second Activity")
 
     }

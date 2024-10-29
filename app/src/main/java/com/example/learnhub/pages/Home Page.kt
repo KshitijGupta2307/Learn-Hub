@@ -64,7 +64,7 @@ fun Home(modifier: Modifier = Modifier, navController: NavHostController) {
             "Android" to R.drawable.android,
             "TOC" to R.drawable.toc,
             "ML" to R.drawable.ml,
-            "To-Do" to R.drawable.todo
+            "Computer Networks" to R.drawable.todo
         )
 
         // Display the grid of clickable image buttons

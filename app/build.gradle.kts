@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.play.services.fitness)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.firebase.storage.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

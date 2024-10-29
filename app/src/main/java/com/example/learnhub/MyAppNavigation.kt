@@ -11,13 +11,14 @@ import com.example.learnhub.pages.Coding
 import com.example.learnhub.pages.HomePage
 import com.example.learnhub.pages.LoginPage
 import com.example.learnhub.pages.Coding
+import com.example.learnhub.pages.ComputerNetworks
 import com.example.learnhub.pages.DBMS
 import com.example.learnhub.pages.ML
 import com.example.learnhub.pages.OS
 import com.example.learnhub.pages.React
 import com.example.learnhub.pages.SignUp
 import com.example.learnhub.pages.TOC
-import com.example.learnhub.pages.ToDo
+
 
 @Composable
 fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel) {
@@ -34,6 +35,6 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel)
         composable("Android") { Android()}
         composable("TOC") { TOC() }
         composable("ML") { ML() }
-        composable("To-Do") { ToDo() }
+        composable("Computer Networks") { ComputerNetworks() }
     }
 }

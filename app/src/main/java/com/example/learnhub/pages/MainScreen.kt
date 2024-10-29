@@ -80,6 +80,6 @@ fun ContentScreen(
     when (selectedIndex) {
         0 -> Home(modifier = modifier, navController = navController)
         1 -> Notification(modifier = modifier)
-        2 -> ToDo(modifier) // Add navController to ToDoScreen if needed
+        2 -> ComputerNetworks(modifier=modifier)
     }
 }
