@@ -60,12 +60,12 @@ fun Home(modifier: Modifier = Modifier, navController: NavHostController) {
 
         // List of items with their corresponding navigation routes and PDF URLs
         val itemsList: List<Triple<String, Int, String>> = listOf(
-            Triple("Coding", R.drawable.coding, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/dbms%20notes.pdf?alt=media&token=d0469817-97b8-4407-a1b5-f0d700bc35db"),
+            Triple("Coding", R.drawable.coding, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/C%20Handwritten%20Notes_compressed-compressed.pdf?alt=media&token=bc93c3f6-f499-4c28-b19b-eddad62eedf3"),
             Triple("OS", R.drawable.os, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
-            Triple("DBMS", R.drawable.dbms, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
-            Triple("React", R.drawable.react, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
-            Triple("Android", R.drawable.android, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
-            Triple("TOC", R.drawable.toc, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
+            Triple("DBMS", R.drawable.dbms, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/DBMS-compressed.pdf?alt=media&token=70cb453d-754c-4d91-9ef2-4802a8505685"),
+            Triple("COA", R.drawable.coa, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/computer%20architecture%20notes-compressed.pdf?alt=media&token=1209eeaa-bccb-4b79-b325-511f3ceccd4d"),
+            Triple("Android", R.drawable.android, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andriod_ShortNotes-compressed.pdf?alt=media&token=821e770c-e086-41b4-aa4d-0cd364479a22"),
+            Triple("Python", R.drawable.pyhton, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
             Triple("ML", R.drawable.ml, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
             Triple("Computer Networks", R.drawable.todo, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0")
         )
@@ -129,14 +129,11 @@ fun FirebasePdfWebView(pdfUrl: String) {
         }
     }, modifier = Modifier.fillMaxSize())
 }
-
 @Composable
 fun PDF() {
 
+
     Column(modifier = Modifier.fillMaxSize().padding(top = 40.dp)) {
-
-
-        // Call the PDF viewer with the Firebase URL
         FirebasePdfWebView(
             pdfUrl = "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/dbms%20notes.pdf?alt=media&token=d0469817-97b8-4407-a1b5-f0d700bc35db"
         )
