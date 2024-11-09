@@ -53,7 +53,7 @@ android {
 dependencies {
 
 
-
+    implementation ("androidx.compose.material3:material3:<latest_version>")
 
         implementation("androidx.compose.runtime:runtime-livedata:1.7.3")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0")

@@ -1,6 +1,7 @@
 package com.example.learnhub.pages
 
 import Home
+import ToDO
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -26,12 +27,11 @@ import androidx.navigation.NavHostController
 import com.example.learnhub.AuthViewModel
 import com.example.learnhub.ui.theme.navItem
 
-
 @SuppressLint("SuspiciousIndentation")
 @Composable
 fun HomePage(
     modifier: Modifier = Modifier,
-    navController: NavHostController, // Use NavHostController
+    navController: NavHostController,
     authViewModel: AuthViewModel
 ) {
     val navItemsList = listOf(
@@ -60,13 +60,13 @@ fun HomePage(
         ContentScreen(
             modifier = Modifier.padding(innerPadding),
             selectedIndex,
-            navController // Pass navController to ContentScreen
+            navController
         )
     }
 
     val authState by authViewModel.authState.observeAsState()
     LaunchedEffect(authState) {
-        if (authState is AuthViewModel.AuthState.Unauthenticated) { // Check for Unauthenticated state
+        if (authState is AuthViewModel.AuthState.Unauthenticated) {
             navController.navigate("LoginPage")
         }
     }
@@ -76,11 +76,11 @@ fun HomePage(
 fun ContentScreen(
     modifier: Modifier,
     selectedIndex: Int,
-    navController: NavHostController // Use NavHostController
+    navController: NavHostController
 ) {
     when (selectedIndex) {
-        0 -> Home(modifier = modifier, navController = navController)
-        1 -> Notification(modifier = modifier)
-        2 -> ToDO()
+        0 -> Home( modifier =modifier , navController = navController) // Pass navController correctly
+        1 -> Notification(modifier = modifier) // Ensure Notification composable is defined
+        2 -> ToDO() // Ensure ToDO composable is defined
     }
 }

@@ -1,3 +1,4 @@
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -65,7 +66,7 @@ fun Home(modifier: Modifier = Modifier, navController: NavHostController) {
             Triple("DBMS", R.drawable.dbms, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/DBMS-compressed.pdf?alt=media&token=70cb453d-754c-4d91-9ef2-4802a8505685"),
             Triple("COA", R.drawable.coa, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/computer%20architecture%20notes-compressed.pdf?alt=media&token=1209eeaa-bccb-4b79-b325-511f3ceccd4d"),
             Triple("Android", R.drawable.android, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andriod_ShortNotes-compressed.pdf?alt=media&token=821e770c-e086-41b4-aa4d-0cd364479a22"),
-            Triple("Python", R.drawable.pyhton, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
+            Triple("Python", R.drawable.python, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
             Triple("ML", R.drawable.ml, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0"),
             Triple("Computer Networks", R.drawable.todo, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0")
         )
@@ -118,6 +119,7 @@ fun GridItemWithImageAndText(label: String, imageResId: Int, onClick: () -> Unit
 fun PdfViewerScreen(pdfUrl: String) {
     FirebasePdfWebView(pdfUrl)
 }
+@SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun FirebasePdfWebView(pdfUrl: String) {
     val pdfDriveViewerUrl = "https://drive.google.com/viewerng/viewer?embedded=true&url=$pdfUrl"
