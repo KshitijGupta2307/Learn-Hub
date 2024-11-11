@@ -1,9 +1,11 @@
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
+import androidx.compose.foundation.lazy.LazyColumn
+
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -12,11 +14,68 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 
+// Define Task data class
+data class Task(val text: String, var isCompleted: Boolean)
+
+// ViewModel for managing the To-Do list
+class ToDoViewModel : ViewModel() {
+    val tasks = mutableStateListOf<Task>()
+
+    fun addTask(task: Task) {
+        tasks.add(task)
+    }
+
+    fun removeTask(task: Task) {
+        tasks.remove(task)
+    }
+
+    fun updateTask(index: Int, updatedTask: Task) {
+        tasks[index] = updatedTask
+    }
+}
+
+// Composable for a single task item
 @Composable
-fun ToDO() {
+fun TaskItem(task: Task, onTaskCheckedChange: (Boolean) -> Unit, onDelete: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(
+            checked = task.isCompleted,
+            onCheckedChange = onTaskCheckedChange
+        )
+
+        Text(
+            text = task.text,
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 8.dp),
+            fontSize = 18.sp
+        )
+
+        IconButton(onClick = onDelete) {
+            Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = "Delete Task",
+                tint = Color.Red
+            )
+        }
+    }
+}
+
+// Main To-Do Composable that observes and interacts with the ViewModel
+@Composable
+fun ToDO(viewModel: ToDoViewModel = viewModel()) {
     var taskText by remember { mutableStateOf("") }
-    val tasks = remember { mutableStateListOf<Task>() } // Reactive list of tasks
 
     Column(
         modifier = Modifier
@@ -53,7 +112,7 @@ fun ToDO() {
             Button(
                 onClick = {
                     if (taskText.isNotBlank()) {
-                        tasks.add(Task(taskText, false)) // Add new task to the list
+                        viewModel.addTask(Task(taskText, false)) // Add new task via ViewModel
                         taskText = "" // Reset the input field
                     }
                 },
@@ -69,14 +128,16 @@ fun ToDO() {
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ) {
-            items(tasks.size) { index ->
+            items(viewModel.tasks) { task ->
                 TaskItem(
-                    task = tasks[index],
+                    task = task,
                     onTaskCheckedChange = { isChecked ->
-                        tasks[index] = tasks[index].copy(isCompleted = isChecked)
+                        val updatedTask = task.copy(isCompleted = isChecked)
+                        val index = viewModel.tasks.indexOf(task)
+                        viewModel.updateTask(index, updatedTask)
                     },
                     onDelete = {
-                        tasks.removeAt(index)
+                        viewModel.removeTask(task)
                     }
                 )
             }
@@ -84,37 +145,3 @@ fun ToDO() {
     }
 }
 
-// Data class for representing a task
-data class Task(val text: String, var isCompleted: Boolean)
-
-// Composable for rendering a single task item
-@Composable
-fun TaskItem(task: Task, onTaskCheckedChange: (Boolean) -> Unit, onDelete: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Checkbox(
-            checked = task.isCompleted,
-            onCheckedChange = onTaskCheckedChange
-        )
-
-        Text(
-            text = task.text,
-            modifier = Modifier
-                .weight(1f)
-                .padding(start = 8.dp),
-            fontSize = 18.sp
-        )
-
-        IconButton(onClick = onDelete) {
-            Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = "Delete Task",
-                tint = Color.Red
-            )
-        }
-    }
-}

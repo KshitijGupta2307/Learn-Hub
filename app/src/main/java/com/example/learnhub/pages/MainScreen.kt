@@ -79,7 +79,7 @@ fun ContentScreen(
     navController: NavHostController
 ) {
     when (selectedIndex) {
-        0 -> Home( modifier =modifier , navController = navController) // Pass navController correctly
+        0 -> Home( modifier =modifier , navController = navController, authViewModel = AuthViewModel()) // Pass navController correctly
         1 -> Notification(modifier = modifier) // Ensure Notification composable is defined
         2 -> ToDO() // Ensure ToDO composable is defined
     }

@@ -52,7 +52,7 @@ android {
 
 dependencies {
 
-
+    implementation ("androidx.compose.material3:material3:1.0.1")
     implementation ("androidx.compose.material3:material3:<latest_version>")
 
         implementation("androidx.compose.runtime:runtime-livedata:1.7.3")
@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.firebase.storage.ktx)
+    implementation(libs.androidx.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
