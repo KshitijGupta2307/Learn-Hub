@@ -1,5 +1,6 @@
 package com.example.learnhub.pages
 
+import AuthViewModel
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -31,7 +32,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.learnhub.AuthViewModel
+
 import com.example.learnhub.R
 
 @Composable
@@ -115,8 +116,9 @@ fun SignUp( modifier: Modifier = Modifier,
             // Sign Up Button
             Button(
                 onClick = {
-                    authViewModel.SignUp(email, password)
-                },enabled = authState.value != AuthViewModel.AuthState.Loading)
+                    authViewModel.signUp(email, password)
+                },
+                enabled = authState.value != AuthViewModel.AuthState.Loading)
 
     {
                 Text("Sign Up")

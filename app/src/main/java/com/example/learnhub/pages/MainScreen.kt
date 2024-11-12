@@ -1,5 +1,6 @@
 package com.example.learnhub.pages
 
+import AuthViewModel
 import Home
 import ToDO
 import android.annotation.SuppressLint
@@ -24,7 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import com.example.learnhub.AuthViewModel
+
 import com.example.learnhub.ui.theme.navItem
 
 @SuppressLint("SuspiciousIndentation")

@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavHostController
-import com.example.learnhub.AuthViewModel
 import com.example.learnhub.R
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,13 +40,15 @@ fun Home(
     val authState by authViewModel.authState.observeAsState()
 
     LaunchedEffect(authState) {
-        if (authState is AuthViewModel.AuthState.Unauthenticated) {
-            navController.navigate("LoginPage") {
-                popUpTo("Home") { inclusive = true }
+        authState?.let { state ->
+            if (state == AuthViewModel.AuthState.Unauthenticated) {
+                navController.navigate("LoginPage") {
+                    popUpTo("Home") { inclusive = true }  // Clear Home from the back stack
+                    launchSingleTop = true
+                }
             }
         }
     }
-
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
@@ -128,8 +130,9 @@ fun Home(
                                 .padding(8.dp)
                                 .clickable {
                                     scope.launch {
-                                        authViewModel.logout()
                                         drawerState.close()
+                                        delay(100)
+                                        authViewModel.logout()
                                     }
                                 }
                         )
@@ -139,14 +142,14 @@ fun Home(
             content = {
                 // List of items with their corresponding navigation routes and PDF URLs
                 val itemsList = listOf(
-                    Triple("Coding", R.drawable.coding, "https://firebasestorage.googleapis.com/..."),
-                    Triple("OS", R.drawable.os, "https://firebasestorage.googleapis.com/..."),
-                    Triple("DBMS", R.drawable.dbms, "https://firebasestorage.googleapis.com/..."),
-                    Triple("COA", R.drawable.coa, "https://firebasestorage.googleapis.com/..."),
-                    Triple("Android", R.drawable.android, "https://firebasestorage.googleapis.com/..."),
-                    Triple("Python", R.drawable.python, "https://firebasestorage.googleapis.com/..."),
-                    Triple("ML", R.drawable.ml, "https://firebasestorage.googleapis.com/..."),
-                    Triple("Computer Networks", R.drawable.computernetworks, "https://firebasestorage.googleapis.com/...")
+                    Triple("Coding", R.drawable.coding, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/C%20Handwritten%20Notes_compressed-compressed.pdf?alt=media&token=bc93c3f6-f499-4c28-b19b-eddad62eedf3"),
+                    Triple("OS", R.drawable.os, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Operating-system-Handwritten-Notes.pdf?alt=media&token=e075d18d-d58c-4c00-8aca-f43d1a6e7708"),
+                    Triple("DBMS", R.drawable.dbms, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/DBMS-compressed.pdf?alt=media&token=70cb453d-754c-4d91-9ef2-4802a8505685"),
+                    Triple("COA", R.drawable.coa, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/computer%20architecture%20notes-compressed.pdf?alt=media&token=1209eeaa-bccb-4b79-b325-511f3ceccd4d"),
+                    Triple("Android", R.drawable.android, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andriod_ShortNotes-compressed.pdf?alt=media&token=821e770c-e086-41b4-aa4d-0cd364479a22"),
+                    Triple("Python", R.drawable.python, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Python%20HandWritten%20Notes.pdf?alt=media&token=4c9b972e-0c13-4dfe-b271-c7b217508041"),
+                    Triple("TOC", R.drawable.toc, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/CS-501%20TOC%20Notes.pdf?alt=media&token=8e260134-d200-432e-a63e-87e0e836a241"),
+                    Triple("Computer Networks", R.drawable.computernetworks, "https://firebasestorage.googleapis.com/v0/b/learnhub-611b0.appspot.com/o/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf?alt=media&token=1de6a8e1-2fa7-4cc2-ac52-c2b81ed64de0")
                 )
 
                 LazyVerticalGrid(
