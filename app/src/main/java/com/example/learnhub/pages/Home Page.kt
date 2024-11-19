@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
@@ -27,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavHostController
 import com.example.learnhub.R
+import com.example.learnhub.pages.Contact
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -49,9 +49,9 @@ fun Home(
             }
         }
     }
+
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-
 
     Column(
         modifier = modifier
@@ -73,18 +73,16 @@ fun Home(
                     imageVector = Icons.Default.Menu,
                     contentDescription = "Menu",
                     tint = Color.Black
-
                 )
             }
 
             Spacer(modifier = Modifier.width(8.dp))
 
             Text(
-                text = "      Learn Hub",
+                text = "Learn Hub",
                 textAlign = TextAlign.Center,
                 fontSize = 36.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 0.dp)
+                fontWeight = FontWeight.Bold
             )
         }
 
@@ -93,50 +91,67 @@ fun Home(
         ModalNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {
-                if (drawerState.isOpen) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .width(300.dp) // Increase drawer width
-                            .background(Color.White)
-                            .padding(16.dp),
-                        horizontalAlignment = Alignment.Start
-                    ) {
-                        Text(
-                            text = "Learn Hub",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 24.sp,
-                            color = Color.Black
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
+                Column(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(300.dp) // Increase drawer width
+                        .background(Color.White)
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    Text(
+                        text = "Learn Hub",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 24.sp,
+                        color = Color.Black
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                        Text(
-                            text = "Home",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color.Black,
-                            modifier = Modifier
-                                .padding(8.dp)
-                                .clickable {
-                                    scope.launch { drawerState.close() }
+                    Text(
+                        text = "Home",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color.Black,
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .clickable {
+                                scope.launch { drawerState.close() }
+                            }
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+
+                    Text(
+                        text = "Contact Us",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.Black,
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .clickable {
+                            scope.launch {
+                                drawerState.close()
+                                navController.navigate("Contact")
+
+                            }
+                            }
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = "Logout",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color.Black,
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .clickable {
+                                scope.launch {
+                                    drawerState.close()
+                                    delay(100)
+                                    authViewModel.logout()
                                 }
-                        )
-                        Text(
-                            text = "Logout",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color.Black,
-                            modifier = Modifier
-                                .padding(8.dp)
-                                .clickable {
-                                    scope.launch {
-                                        drawerState.close()
-                                        delay(100)
-                                        authViewModel.logout()
-                                    }
-                                }
-                        )
-                    }
+                            }
+                    )
+
                 }
             },
             content = {

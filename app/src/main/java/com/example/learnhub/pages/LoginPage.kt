@@ -112,14 +112,6 @@ fun  LoginPage(
         {
             Text("Login")
         }
-        Spacer(modifier = Modifier.height(32.dp))
-
-        TextButton(onClick = {
-            // Handle Forgot Password logic here
-        }) {
-            Text("Forgot Password?")
-        }
-
         Spacer(modifier = Modifier.height(16.dp))
         TextButton(onClick = {
            navController.navigate("SignUp")

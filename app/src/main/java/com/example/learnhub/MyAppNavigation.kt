@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.learnhub.pages.Contact
 
 import com.example.learnhub.pages.HomePage
 import com.example.learnhub.pages.LoginPage
@@ -23,6 +24,7 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel)
     NavHost(navController = navController, startDestination = startDestination) {
         composable("LoginPage") { LoginPage(modifier, navController, authViewModel) }
         composable("SignUp") { SignUp(modifier, navController, authViewModel) }
+        composable("Contact") { Contact() }
 
         composable("HomePage") {
             HomePage(
